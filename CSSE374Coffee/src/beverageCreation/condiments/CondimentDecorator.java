@@ -1,29 +1,34 @@
 package beverageCreation.condiments;
 
+import java.util.ArrayList;
+
 import beverageCreation.Beverage;
 
-public abstract class CondimentDecorator implements Beverage{
+public class CondimentDecorator implements Beverage{
 	
 	
 	private Beverage innerBeverage;
-	private float cost;
-	public CondimentDecorator(Beverage beverage) {
+	private String condimentName;
+	private int quantity;
+	
+	
+	public CondimentDecorator(Beverage beverage, String condimentName, Integer howMany) {
 		this.innerBeverage = beverage;
+		this.condimentName = condimentName;
+		this.quantity = howMany;
+		// TODO Auto-generated constructor stub
 	}
-	
-	public float getCost() {
-		return this.cost;
-	}
-	
-	public void setCost(float cost) {
-		this.cost = cost;
-	
-	}
-	
-	
-	public float calculateCost() {
-		return this.cost + innerBeverage.calculateCost();
 
-		
+	@Override
+	public String getAsString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public ArrayList<String> unwrapDrink() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

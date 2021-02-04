@@ -1,18 +1,32 @@
 package beverageCreation;
 
+import java.util.ArrayList;
+
 import beverageCreation.condiments.CondimentDecorator;
 
-public class Coffee extends CondimentDecorator {
-	private int coffeeDefaultCost;
-	private String size = "small";
+public class Coffee implements Beverage{
+	
+	private String coffeeType;
+	
+	public Coffee(String coffeeType) {
+		this.coffeeType = coffeeType;
+		
+	}
 
+	
+	/**
+	 *Returns null to signal that the base drink was
+	 *found
+	 */
+	@Override
+	public ArrayList<String> unwrapDrink() {
+		return null;
+	}
 
-	//base drinks shouldn't have a superclass
-	//probably easiest to just give it a null pointer
-	public Coffee(Beverage beverage) {
-		super(beverage);
-		this.coffeeDefaultCost = 2;
-		super.setCost(coffeeDefaultCost);
+	@Override
+	public String getAsString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

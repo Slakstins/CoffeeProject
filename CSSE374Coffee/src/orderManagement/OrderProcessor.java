@@ -1,7 +1,7 @@
 package orderManagement;
 
-import beverageCreation.BeverageFactory;
-import beverageCreation.CoffeeFactory;
+import beverageCreation.Beverage;
+import beverageCreation.BeverageProducer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import org.json.*;
 
 
 public class OrderProcessor implements Observer{
-	private BeverageFactory coffeeFactory;
+	private BeverageProducer beverageProducer;
 	private OrderObtainer orderObtainer;
 
 
@@ -25,7 +25,7 @@ public class OrderProcessor implements Observer{
 		//factory and coffee factory for a single order
 		//could just use a BeverageFactory pointer and swap back and forth
 		//based on the drink
-		this.coffeeFactory = new CoffeeFactory();
+		this.beverageProducer = new BeverageProducer();
 	}
 	
 	
@@ -51,11 +51,14 @@ public class OrderProcessor implements Observer{
 			Integer qty = condiment.getInt("qty");
 			condimentsMap.put(name, qty);
 		}
-		
 
+		Beverage beverage = beverageProducer.produceBeverage(drink, condimentsMap);		
+
+		DrinkMaker drinkMaker = this.findMaker(street, zip);
+		
+		//drinkMaker.produceDrinkCommand();
 		
 	}
-	
 	
 	
 	
@@ -63,8 +66,10 @@ public class OrderProcessor implements Observer{
 	 * @param street
 	 * @param zip
 	 * Find a drinkmaker machine using street and zip
+	 * IMPLEMENT ME
 	 */
-	public void findMaker(String street, int zip) {
+	public DrinkMaker findMaker(String street, int zip) {
+		return null;
 		
 	}
 	

@@ -1,7 +1,10 @@
 package beverageCreation;
 
+import java.util.ArrayList;
+
 public interface Beverage {
-	public float calculateCost();
-	public void setCost(float cost);
+
+	public String getAsString();
+	public ArrayList<String> unwrapDrink();
 
 }
