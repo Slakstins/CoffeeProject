@@ -2,7 +2,13 @@ package orderManagement;
 
 import beverageCreation.BeverageFactory;
 import beverageCreation.CoffeeFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.json.*;
+
+
 
 
 public class OrderProcessor implements Observer{
@@ -29,16 +35,36 @@ public class OrderProcessor implements Observer{
 		String data = orderObtainer.pullOrderFileData();
 		JSONObject outerJson = new JSONObject(data);
 	    JSONObject orderJson = outerJson.getJSONObject("order");
+	    JSONObject addressJson = orderJson.getJSONObject("address");
+	    JSONArray condimentsJson = orderJson.getJSONArray("condiments");
+	    
 		int orderID = orderJson.getInt("orderID");
-		System.out.println(orderID);
+		String street = addressJson.getString("street");
+		int zip = addressJson.getInt("ZIP");
+		String drink = orderJson.getString("drink");
+
+		HashMap<String, Integer> condimentsMap = new HashMap<String, Integer>();
+		
+		for (int i = 0; i < condimentsJson.length(); i++) {
+			JSONObject condiment = (JSONObject) condimentsJson.get(i);
+			String name = condiment.getString("name");
+			Integer qty = condiment.getInt("qty");
+			condimentsMap.put(name, qty);
+		}
+		
 
 		
-
-
-		
-		
-		
-		
+	}
+	
+	
+	
+	
+	/**
+	 * @param street
+	 * @param zip
+	 * Find a drinkmaker machine using street and zip
+	 */
+	public void findMaker(String street, int zip) {
 		
 	}
 	
