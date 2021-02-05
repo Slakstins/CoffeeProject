@@ -26,9 +26,13 @@ public class CondimentDecorator implements Beverage{
 	}
 
 	@Override
-	public ArrayList<String> unwrapDrink() {
-		// TODO Auto-generated method stub
-		return null;
+	public Beverage unwrapDrink() {
+		return innerBeverage;
+	}
+
+	@Override
+	public Integer getQty() {
+		return this.quantity;
 	}
 	
 }

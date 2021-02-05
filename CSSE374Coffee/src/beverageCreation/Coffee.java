@@ -19,7 +19,7 @@ public class Coffee implements Beverage{
 	 *found
 	 */
 	@Override
-	public ArrayList<String> unwrapDrink() {
+	public Beverage unwrapDrink() {
 		return null;
 	}
 
@@ -27,6 +27,13 @@ public class Coffee implements Beverage{
 	public String getAsString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public Integer getQty() {
+		// TODO Auto-generated method stub
+		return 1;
 	}
 	
 }

@@ -2,6 +2,9 @@ package orderManagement;
 
 import beverageCreation.Beverage;
 import beverageCreation.BeverageProducer;
+import commands.CommandFactory;
+import shop.Controller;
+import shop.DrinkMaker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,10 +17,12 @@ import org.json.*;
 public class OrderProcessor implements Observer{
 	private BeverageProducer beverageProducer;
 	private OrderObtainer orderObtainer;
+	private CommandFactory commandFactory;
 
 
 	public OrderProcessor(OrderObtainer orderObtainer) {
 		orderObtainer.registerObserver(this);
+
 		this.orderObtainer = orderObtainer;
 		// is it okay to instantiate this here?
 		//would make sense to instantiate based on the order,
@@ -53,8 +58,13 @@ public class OrderProcessor implements Observer{
 		}
 
 		Beverage beverage = beverageProducer.produceBeverage(drink, condimentsMap);		
+		
+		Controller controller = this.findController(street, zip);
 
-		DrinkMaker drinkMaker = this.findMaker(street, zip);
+	
+		DrinkMaker drinkMaker =	controller.findMaker();
+		
+		commandFactory.produceDrinkOrderCommand(beverage, controller.getID(), drinkMaker.getID(), orderID, drinkMaker.getType());
 		
 		//drinkMaker.produceDrinkCommand();
 		
@@ -68,7 +78,7 @@ public class OrderProcessor implements Observer{
 	 * Find a drinkmaker machine using street and zip
 	 * IMPLEMENT ME
 	 */
-	public DrinkMaker findMaker(String street, int zip) {
+	public Controller findController(String street, int zip) {
 		return null;
 		
 	}

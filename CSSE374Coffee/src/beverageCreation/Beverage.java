@@ -1,10 +1,13 @@
 package beverageCreation;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public interface Beverage {
 
 	public String getAsString();
-	public ArrayList<String> unwrapDrink();
+	public Beverage unwrapDrink();
+	public Integer getQty();
+
 
 }
