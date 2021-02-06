@@ -56,6 +56,7 @@ public class SimpleCommandFactory extends CommandFactory {
 		outerObj.put("command", command);
 		
 		createFile("Command.json");
+		
 
         try {
         	FileWriter fileWriter = new FileWriter("Command.json");
@@ -67,9 +68,6 @@ public class SimpleCommandFactory extends CommandFactory {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		
-		
 		
 		// TODO Auto-generated method stub
 		
