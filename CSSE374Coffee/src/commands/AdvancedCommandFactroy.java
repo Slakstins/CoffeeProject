@@ -10,14 +10,11 @@ import org.json.JSONObject;
 
 import beverageCreation.Beverage;
 
-public class SimpleCommandFactory extends CommandFactory {
-	
+public class AdvancedCommandFactroy extends CommandFactory {
+
 	private String commandFilename = "Command.json";
 	
-	public void unwrapBeverageData(Beverage beverage) {
 		
-		
-	}
 
 
 	/**
@@ -57,28 +54,20 @@ public class SimpleCommandFactory extends CommandFactory {
 		
 
 		//write the JSONObject to the command file
-		FileWriter fileWriter = null;
         try {
-        	fileWriter = new FileWriter(commandFile.getName());
+        	FileWriter fileWriter = new FileWriter(commandFile.getName());
 			fileWriter.write(outerObj.toString(2));
+			fileWriter.close();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			try {
-				fileWriter.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 		}
         
         //return a pointer to the command file
-        DrinkOrderCommand machineCommand = new DrinkOrderCommand(outerObj, commandFile);
+        DrinkOrderCommand machineCommand = new DrinkOrderCommand(command, commandFile);
         return machineCommand;
 		
 		

@@ -22,7 +22,7 @@ public class CondimentDecorator implements Beverage{
 	@Override
 	public String getAsString() {
 		// TODO Auto-generated method stub
-		return null;
+		return condimentName;
 	}
 
 	@Override

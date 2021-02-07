@@ -1,0 +1,16 @@
+{"command": {
+  "Options": [
+    {
+      "qty": 1,
+      "Name": "Sugar"
+    },
+    {
+      "qty": 2,
+      "Name": "Cream"
+    }
+  ],
+  "controller_id": 1,
+  "orderID": 1,
+  "coffee_machine_id": 0,
+  "Requesttype": "Automated"
+}}

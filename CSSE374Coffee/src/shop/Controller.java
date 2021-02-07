@@ -2,6 +2,8 @@ package shop;
 
 import java.util.ArrayList;
 
+import machineCommunication.DrinkMaker;
+
 public class Controller {
 	private int ID;
 	private ArrayList<DrinkMaker> drinkMakers;

@@ -2,9 +2,14 @@ package orderManagement;
 
 import beverageCreation.Beverage;
 import beverageCreation.BeverageProducer;
+import commands.AdvancedCommandFactroy;
+import commands.Command;
 import commands.CommandFactory;
+import machineCommunication.AdvancedBehavior;
+import machineCommunication.CapabilityBehavior;
+import machineCommunication.DrinkMaker;
+import machineCommunication.SimpleBehavior;
 import shop.Controller;
-import shop.DrinkMaker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,17 +64,52 @@ public class OrderProcessor implements Observer{
 
 		Beverage beverage = beverageProducer.produceBeverage(drink, condimentsMap);		
 		
-		Controller controller = this.findController(street, zip);
+		//Controller controller = this.findController(street, zip);
+		Controller controller = new Controller(1);
+		
+		//DrinkMaker drinkMaker = controller.findMaker();
+		DrinkMaker drinkMaker = new DrinkMaker(2, "Automated");
+		
+		//set the behavior of the drinkMaker that will be used for communication
+		this.addDrinkMakerBehvaior(drinkMaker);
+		
+		//set the command type based on the type of drinkMaker
+		if (drinkMaker.getType().equals("Automated")) {
+			commandFactory = new AdvancedCommandFactroy();
+		}
+		
+		//produce JSON for being sent to the physical coffee maker
+		Command command = commandFactory.produceDrinkOrderCommand(beverage, controller.getID(), drinkMaker.getID(), orderID, drinkMaker.getType());
+		
+		drinkMaker.getBehavior().sendOrder(command);
 
-	
-		DrinkMaker drinkMaker =	controller.findMaker();
-		
-		commandFactory.produceDrinkOrderCommand(beverage, controller.getID(), drinkMaker.getID(), orderID, drinkMaker.getType());
-		
-		//drinkMaker.produceDrinkCommand();
 		
 	}
 	
+	public void addDrinkMakerBehvaior(DrinkMaker maker) {
+		String type = maker.getType();
+		CapabilityBehavior behavior = null;
+		switch(type) {
+		case "Automated":
+			behavior = new AdvancedBehavior();
+			break;
+		case "Simple":
+			behavior = new SimpleBehavior();
+			break;
+		case "Programmable":
+			//do we need another behavior for this???
+			behavior = new AdvancedBehavior();
+			break;
+		default:
+			System.out.println("machine type not supported in OrderProcessor.addDrinkBehavior()");
+			break;
+
+		}
+		
+		maker.setBehavior(behavior);
+
+		
+	}
 	
 	
 	/**
