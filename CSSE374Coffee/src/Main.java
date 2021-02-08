@@ -9,7 +9,8 @@ public class Main {
 		AppCommunicator appCommunicator = new AppCommunicator(orderObtainer);
 		OrderProcessor orderProcessor = new OrderProcessor(orderObtainer);
 		
-		orderObtainer.obtainOrderJson();
+		//take input from the user for orderEXAMPLE to run
+		orderObtainer.obtainOrderJson(1);
 		
 		
 		
