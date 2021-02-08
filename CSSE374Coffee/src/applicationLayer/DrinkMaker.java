@@ -3,11 +3,13 @@ package shop;
 public class DrinkMaker {
 	private int ID;
 	private CapabilityBehavior behavior;
+	private String behaviorType
 	
 	
-	public DrinkMaker(int ID, CapabilityBehavior behavior) {
+	public DrinkMaker(int ID, CapabilityBehavior behavior, String behaviorType) {
 		this.ID = ID;
-		this.behavior = behavior
+		this.behavior = behavior;
+		this.behaviorType = behaviorType
 	}
 
 	public int getID() {
@@ -20,7 +22,7 @@ public class DrinkMaker {
 		return null;
 	}
 	
-	public void executeBehavior(String Json){
+	public void executeBehavior(JSONObject Json){
 		behavior.sendOrder(Json)
 	}
 
