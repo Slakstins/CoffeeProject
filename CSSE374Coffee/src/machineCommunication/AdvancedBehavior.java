@@ -9,7 +9,7 @@ public class AdvancedBehavior implements CapabilityBehavior {
 	public void sendOrder(Command command){
 		System.out.println("order sent to advanced machine");
 		
-		System.out.println("order retrieved from machine");
+		System.out.println("response retrieved from machine");
 		
 		JSONObject response = generateMachineResponse(command);
 		
@@ -71,7 +71,7 @@ public class AdvancedBehavior implements CapabilityBehavior {
 			break;
 		}
 		
-		machineResponse.put("status", 0);
+		machineResponse.put("status", status);
 		
 		return machineResponse;
 

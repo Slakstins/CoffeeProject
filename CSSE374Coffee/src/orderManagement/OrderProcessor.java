@@ -5,6 +5,7 @@ import beverageCreation.BeverageProducer;
 import commands.AdvancedCommandFactroy;
 import commands.Command;
 import commands.CommandFactory;
+import dataLayer.ShopInitializer;
 import machineCommunication.AdvancedBehavior;
 import machineCommunication.CapabilityBehavior;
 import machineCommunication.DrinkMaker;
@@ -23,10 +24,12 @@ public class OrderProcessor implements Observer{
 	private BeverageProducer beverageProducer;
 	private OrderObtainer orderObtainer;
 	private CommandFactory commandFactory;
+	private ShopInitializer shopInitializer;
 
 
 	public OrderProcessor(OrderObtainer orderObtainer) {
 		orderObtainer.registerObserver(this);
+		this.shopInitializer = new ShopInitializer();
 
 		this.orderObtainer = orderObtainer;
 		// is it okay to instantiate this here?
@@ -64,11 +67,12 @@ public class OrderProcessor implements Observer{
 
 		Beverage beverage = beverageProducer.produceBeverage(drink, condimentsMap);		
 		
-		//Controller controller = this.findController(street, zip);
-		Controller controller = new Controller(1);
+
 		
-		//DrinkMaker drinkMaker = controller.findMaker();
-		DrinkMaker drinkMaker = new DrinkMaker(2, "Automated");
+		ArrayList<Controller> controllers = shopInitializer.findControllers(street, zip);
+		Controller controller = selectController(controllers);
+
+		DrinkMaker drinkMaker = selectDrinkMaker(controller);
 		
 		//set the behavior of the drinkMaker that will be used for communication
 		this.addDrinkMakerBehvaior(drinkMaker);
@@ -82,11 +86,19 @@ public class OrderProcessor implements Observer{
 		Command command = commandFactory.produceDrinkOrderCommand(beverage, controller.getID(), drinkMaker.getID(), orderID, drinkMaker.getType());
 		
 		drinkMaker.getBehavior().sendOrder(command);
-
-		
 	}
 	
-	public void addDrinkMakerBehvaior(DrinkMaker maker) {
+	private Controller selectController(ArrayList<Controller> controllers) {
+		return controllers.get(0);
+	}
+	
+	private DrinkMaker selectDrinkMaker(Controller controller) {
+		return controller.findMaker();
+	}
+	
+	
+	
+	private void addDrinkMakerBehvaior(DrinkMaker maker) {
 		String type = maker.getType();
 		CapabilityBehavior behavior = null;
 		switch(type) {
@@ -111,17 +123,6 @@ public class OrderProcessor implements Observer{
 		
 	}
 	
-	
-	/**
-	 * @param street
-	 * @param zip
-	 * Find a drinkmaker machine using street and zip
-	 * IMPLEMENT ME
-	 */
-	public Controller findController(String street, int zip) {
-		return null;
-		
-	}
 	
 	@Override
 	public void update() {

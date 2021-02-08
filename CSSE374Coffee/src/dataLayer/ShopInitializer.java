@@ -13,11 +13,27 @@ public class ShopInitializer {
 	
 	public ShopInitializer(){
 		//Initialize shops one by one with addresses
+		shops = new ArrayList<Shop>();
 		Shop newShop = new Shop("200 N Main", 47803);
 		addControllers(newShop, 2);
 		shops.add(newShop);
 		//add a number of controllers to each shop
 	}
+	
+	public ArrayList<Controller> findControllers(String address, int zip) {
+		for (int i = 0; i < shops.size(); i++) {
+			Shop shop = shops.get(i);
+			if (shop.getAddress().equals(address) && zip == shop.getZip()) {
+				return shop.getControllers();
+			}
+			
+		}
+		System.out.println("no controllers for specified address");
+		return null;
+
+		
+	}
+	
 	
 	public void addControllers(Shop shop, int count) {
 		ArrayList<Controller> controllers = new ArrayList<Controller>();

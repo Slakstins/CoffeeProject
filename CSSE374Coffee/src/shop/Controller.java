@@ -16,11 +16,12 @@ public class Controller {
 
 	/**
 	 * look through drinkMakers and find one that is not busy
+	 * pretend to do this by just returning the first one
 	 * @return
 	 */
 	public DrinkMaker findMaker() {
 
-		return null;
+		return drinkMakers.get(0);
 	}
 	
 	public void setDrinkMakers(ArrayList<DrinkMaker> drinkMakers) {

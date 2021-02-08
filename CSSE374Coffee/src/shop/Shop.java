@@ -27,4 +27,8 @@ public class Shop {
 		
 	}
 
+	public ArrayList<Controller> getControllers() {
+		return this.controllers;
+		
+	}
 }
