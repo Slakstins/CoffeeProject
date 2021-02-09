@@ -20,18 +20,14 @@ public class SimpleCommandFactory extends CommandFactory {
 	}
 
 
-	/**
-	 *might want to put this in the superclass so it's in both. How will this vary from simple to advanced
-	 *Controllers?
-	 */
 	@Override
-	public Command produceDrinkOrderCommand(Beverage beverage, int controllerID, int machineID, int orderID,
-			String requestType) {
+	public Command produceDrinkOrderCommand(Beverage beverage, int controllerID, int machineID, int orderID) {
 		JSONObject command = new JSONObject();
 		command.put("controller_id", controllerID);
 		command.put("coffee_machine_id", machineID);
 		command.put("orderID", orderID);
-		command.put("Requesttype", requestType);
+		//we know this because it is a simple factory!
+		command.put("Requesttype", "Simple");
 		
 		
 		

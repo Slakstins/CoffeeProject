@@ -83,7 +83,7 @@ public class OrderProcessor implements Observer{
 		}
 		
 		//produce JSON for being sent to the physical coffee maker
-		Command command = commandFactory.produceDrinkOrderCommand(beverage, controller.getID(), drinkMaker.getID(), orderID, drinkMaker.getType());
+		Command command = commandFactory.produceDrinkOrderCommand(beverage, controller.getID(), drinkMaker.getID(), orderID);
 		
 		drinkMaker.getBehavior().sendOrder(command);
 	}

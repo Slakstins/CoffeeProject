@@ -22,13 +22,12 @@ public class AdvancedCommandFactroy extends CommandFactory {
 	 *Controllers?
 	 */
 	@Override
-	public Command produceDrinkOrderCommand(Beverage beverage, int controllerID, int machineID, int orderID,
-			String requestType) {
+	public Command produceDrinkOrderCommand(Beverage beverage, int controllerID, int machineID, int orderID) {
 		JSONObject command = new JSONObject();
 		command.put("controller_id", controllerID);
 		command.put("coffee_machine_id", machineID);
 		command.put("orderID", orderID);
-		command.put("Requesttype", requestType);
+		command.put("Requesttype", "Automated");
 		
 		
 		
