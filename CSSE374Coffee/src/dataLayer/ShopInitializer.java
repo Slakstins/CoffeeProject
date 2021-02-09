@@ -18,6 +18,14 @@ public class ShopInitializer {
 		addControllers(newShop, 2);
 		shops.add(newShop);
 		//add a number of controllers to each shop
+		Shop shop2 = new Shop("200 N Main", 47803);
+		addControllers(shop2, 1);
+		shops.add(shop2);
+		//shop3
+		Shop shop3 = new Shop("200 N Main", 47803);
+		addControllers(shop3, 3);
+		shops.add(shop3);
+		
 	}
 	
 	public ArrayList<Controller> findControllers(String address, int zip) {
