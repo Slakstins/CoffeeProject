@@ -1,16 +1,8 @@
 {"command": {
-  "Options": [
-    {
-      "qty": 1,
-      "Name": "Sugar"
-    },
-    {
-      "qty": 2,
-      "Name": "Cream"
-    }
-  ],
+  "Options": [],
   "controller_id": 0,
-  "orderID": 1,
+  "orderID": 2,
   "coffee_machine_id": 0,
-  "Requesttype": "Automated"
+  "Requesttype": "Automated",
+  "DrinkName": "Expresso"
 }}

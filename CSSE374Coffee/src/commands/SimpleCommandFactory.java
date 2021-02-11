@@ -51,26 +51,17 @@ public class SimpleCommandFactory extends CommandFactory {
 		
 		File commandFile = createFile(commandFilename);
 		
-
 		//write the JSONObject to the command file
-		FileWriter fileWriter = null;
         try {
-        	fileWriter = new FileWriter(commandFile.getName());
+        	FileWriter fileWriter = new FileWriter(commandFile.getName());
 			fileWriter.write(outerObj.toString(2));
+			fileWriter.close();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			try {
-				fileWriter.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
 		}
         
         //return a pointer to the command file
@@ -80,27 +71,5 @@ public class SimpleCommandFactory extends CommandFactory {
 		
 	}
 	
-
-	/**
-	 * returns a pointer to the created file hopefully
-	 * @param filename
-	 * @return
-	 */
-	public File createFile(String filename) {
-		File commandJSON = null;
-			try {
-			commandJSON = new File(filename);
-			if (commandJSON.createNewFile()) {
-	        	System.out.println("File created: " + commandJSON.getName());
-	      	} else {
-	        	System.out.println("File already exists.");
-	      	}
-	    	} catch (IOException e) {
-	      	System.out.println("An error occurred.");
-	      	e.printStackTrace();
-	    	}
-		return commandJSON;
-			
-	}
 
 }

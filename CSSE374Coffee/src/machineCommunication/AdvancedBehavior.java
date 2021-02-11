@@ -1,5 +1,10 @@
 package machineCommunication;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import commands.Command;
@@ -72,7 +77,23 @@ public class AdvancedBehavior implements CapabilityBehavior {
 		}
 		
 		machineResponse.put("status", status);
+		JSONObject outerObj = new JSONObject();
+		outerObj.put("drinkresponse", machineResponse);
 		
+		File commandFile = createFile("MachineResponse.json");
+		//write the JSONObject to the command file
+        try {
+        	FileWriter fileWriter = new FileWriter(commandFile.getName());
+			fileWriter.write(outerObj.toString(2));
+			fileWriter.close();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+
 		return machineResponse;
 
 		
@@ -80,6 +101,19 @@ public class AdvancedBehavior implements CapabilityBehavior {
 		
 	}
 	
+	public File createFile(String filename) {
+		File commandJSON = null;
+			try {
+			commandJSON = new File(filename);
+			if (commandJSON.createNewFile()) {
+	        	System.out.println("File created: " + commandJSON.getName());
+	      	}
+	    	} catch (IOException e) {
+	      	System.out.println("An error occurred.");
+	      	e.printStackTrace();
+	    	}
+		return commandJSON;
+	}
 	
 	
 }

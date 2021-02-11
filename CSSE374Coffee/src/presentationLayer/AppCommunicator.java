@@ -3,6 +3,8 @@ package presentationLayer;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,14 +18,26 @@ public class AppCommunicator {
 	private OrderObtainer orderObtainer;
 
 	private AppCommunicator() {
-
 	}
 	
 	public void setOrderObtainer(OrderObtainer orderObtainer) {
 		this.orderObtainer = orderObtainer;
-		
 	}
-	
+
+	public String sendOrderJson(int orderExNumber) {
+		String first = "./order-input" + orderExNumber + ".json";
+		String fileData = null;
+		try {
+			byte[] file = (Files.readAllBytes(Paths.get(first)));
+		    fileData = new String(file);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		orderObtainer.obtainOrderJson(fileData);
+		return fileData;
+		
+	}	
 	
 	//lazy instantiation
 	public static AppCommunicator getInstance(){
@@ -33,10 +47,6 @@ public class AppCommunicator {
 		return instance;
 	}
 
-	
-	public AppCommunicator(OrderObtainer orderObtainer) {
-		this.orderObtainer = orderObtainer;
-	}
 	
 	public void sendReturnMessage(JSONObject userResponse) {
 		JSONObject outerJSON = new JSONObject();
@@ -77,8 +87,6 @@ public class AppCommunicator {
 			commandJSON = new File(filename);
 			if (commandJSON.createNewFile()) {
 	        	System.out.println("File created: " + commandJSON.getName());
-	      	} else {
-	        	System.out.println("File already exists.");
 	      	}
 	    	} catch (IOException e) {
 	      	System.out.println("An error occurred.");

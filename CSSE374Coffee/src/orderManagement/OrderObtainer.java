@@ -19,16 +19,9 @@ public class OrderObtainer implements Subject{
 	}
 	
 	
-	public void obtainOrderJson(int orderExNumber) {
-		String first = "./order-input" + orderExNumber + ".json";
-		try {
-			byte[] file = (Files.readAllBytes(Paths.get(first)));
-		    this.fileData = new String(file);
-			notifyObservers();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void obtainOrderJson(String fileData) {
+		this.fileData = fileData;
+		notifyObservers();
 		
 	}
 	

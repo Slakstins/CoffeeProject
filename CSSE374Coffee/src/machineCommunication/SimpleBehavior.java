@@ -10,7 +10,8 @@ public class SimpleBehavior implements CapabilityBehavior {
 		//no return message from machine for simple behavior
 		System.out.println("command sent to simple machine");
 		JSONObject appJSON = new JSONObject();
-		JSONObject commandJSON = command.getCommandJSON();
+		JSONObject outerJSON = command.getCommandJSON();
+		JSONObject commandJSON = outerJSON.getJSONObject("command");
 		int orderID = commandJSON.getInt("orderID");
 		int coffeeMachineId = commandJSON.getInt("coffee_machine_id");
 		String statusMessage = "Command sent to simple machine.";

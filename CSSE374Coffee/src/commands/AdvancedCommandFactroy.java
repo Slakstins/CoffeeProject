@@ -27,6 +27,7 @@ public class AdvancedCommandFactroy extends CommandFactory {
 		command.put("controller_id", controllerID);
 		command.put("coffee_machine_id", machineID);
 		command.put("orderID", orderID);
+		//we know this because it is an advanced factory!
 		command.put("Requesttype", "Automated");
 		
 		
@@ -50,8 +51,6 @@ public class AdvancedCommandFactroy extends CommandFactory {
 		outerObj.put("command", command);
 		
 		File commandFile = createFile(commandFilename);
-		
-
 		//write the JSONObject to the command file
         try {
         	FileWriter fileWriter = new FileWriter(commandFile.getName());
@@ -68,31 +67,6 @@ public class AdvancedCommandFactroy extends CommandFactory {
         //return a pointer to the command file
         DrinkOrderCommand machineCommand = new DrinkOrderCommand(command, commandFile);
         return machineCommand;
-		
-		
-	}
-	
-
-	/**
-	 * returns a pointer to the created file hopefully
-	 * @param filename
-	 * @return
-	 */
-	public File createFile(String filename) {
-		File commandJSON = null;
-			try {
-			commandJSON = new File(filename);
-			if (commandJSON.createNewFile()) {
-	        	System.out.println("File created: " + commandJSON.getName());
-	      	} else {
-	        	System.out.println("File already exists.");
-	      	}
-	    	} catch (IOException e) {
-	      	System.out.println("An error occurred.");
-	      	e.printStackTrace();
-	    	}
-		return commandJSON;
-			
 	}
 
 }

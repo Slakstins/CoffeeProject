@@ -18,13 +18,9 @@ public class ShopInitializer {
 		addControllers(newShop, 2);
 		shops.add(newShop);
 		//add a number of controllers to each shop
-		Shop shop2 = new Shop("200 N Main", 47803);
+		Shop shop2 = new Shop("3 S. Walnut", 60601);
 		addControllers(shop2, 1);
 		shops.add(shop2);
-		//shop3
-		Shop shop3 = new Shop("200 N Main", 47803);
-		addControllers(shop3, 3);
-		shops.add(shop3);
 		
 	}
 	
@@ -67,6 +63,8 @@ public class ShopInitializer {
 			controller.setDrinkMakers(drinkMakers);
 			break;
 		case 2:
+			drinkMakers.add(new DrinkMaker(machineId++, "Simple"));
+			controller.setDrinkMakers(drinkMakers);
 			break;
 		case 3:
 			break;
