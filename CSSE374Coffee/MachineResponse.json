@@ -1,6 +1,6 @@
 {"drinkresponse": {
-  "errordesc": "Out of milk, drink cancelled",
-  "orderID": 2,
-  "errorcode": 2,
+  "errordesc": "Machine jammed",
+  "orderID": 3,
+  "errorcode": 26,
   "status": 1
 }}

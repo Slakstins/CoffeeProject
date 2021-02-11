@@ -1,17 +1,18 @@
 package testing;
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.Assert.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import beverageCreation.Beverage;
 import beverageCreation.BeverageProducer;
+
 import orderManagement.OrderObtainer;
 import orderManagement.OrderProcessor;
 import presentationLayer.AppCommunicator;
@@ -133,40 +134,8 @@ class CoffeeTests {
 	    }
 	    return false;
 	    
+
 	}
 	
-	
-
-	@Test
-	void testJSONCreation() {
-		//ensure that the JSON file is being created correctly
-		OrderObtainer orderObtainer = new OrderObtainer();
-		AppCommunicator appCommunicator = AppCommunicator.getInstance();
-		OrderProcessor orderProcessor = new OrderProcessor(orderObtainer);
-		appCommunicator.setOrderObtainer(orderObtainer);
-		
-		//take input from the user for orderEXAMPLE to run
-		appCommunicator.sendOrderJson(1);
-		
-
-		byte[] file = null;
-		String fileString = null;
-		String first = "./order-input" + 1 + ".json";
-		try {
-			file = (Files.readAllBytes(Paths.get(first)));
-		    fileString = new String(file);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}	
-		JSONObject outerJson = new JSONObject(fileString);
-
-	    JSONObject orderJson = outerJson.getJSONObject("order");
-	    JSONObject addressJson = orderJson.getJSONObject("address");
-	    
-		String street = addressJson.getString("street");
-
-	    assertEquals(street, "200 N Main");
-	}
 
 }

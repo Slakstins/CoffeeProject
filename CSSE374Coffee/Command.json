@@ -1,8 +1,11 @@
 {"command": {
-  "Options": [],
-  "controller_id": 0,
-  "orderID": 2,
+  "Options": [{
+    "qty": 2,
+    "Name": "Hazelnut"
+  }],
+  "controller_id": 2,
+  "orderID": 4,
   "coffee_machine_id": 0,
-  "Requesttype": "Automated",
-  "DrinkName": "Expresso"
+  "Requesttype": "Simple",
+  "DrinkName": "Large Latte"
 }}
