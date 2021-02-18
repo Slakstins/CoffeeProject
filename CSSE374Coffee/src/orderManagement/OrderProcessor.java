@@ -2,9 +2,10 @@ package orderManagement;
 
 import beverageCreation.Beverage;
 import beverageCreation.BeverageProducer;
-import commands.AdvancedCommandFactroy;
+import commands.AdvancedCommandFactory;
 import commands.Command;
 import commands.CommandFactory;
+import commands.ProgrammableCommandFactory;
 import commands.SimpleCommandFactory;
 import dataLayer.ShopInitializer;
 import machineCommunication.AdvancedBehavior;
@@ -24,7 +25,6 @@ import org.json.*;
 public class OrderProcessor implements Observer{
 	private BeverageProducer beverageProducer;
 	private OrderObtainer orderObtainer;
-	private CommandFactory commandFactory;
 	private LocationDeterminer locationDeterminer;
 
 
@@ -87,18 +87,26 @@ public class OrderProcessor implements Observer{
 		beverageProducer.addDrinkMakerBehvaior(drinkMaker);
 		
 		//set the command type based on the type of drinkMaker
-		if (drinkMaker.getType().equals("Automated")) {
-			commandFactory = new AdvancedCommandFactroy();
-		}
 		
-		if (drinkMaker.getType().equals("Simple")) {
-			commandFactory = new SimpleCommandFactory();
-		}
-		
+
+		CommandFactory commandFactory = generateCommandFactoryType(drinkMaker);
 		//produce JSON for being sent to the physical coffee maker
 		Command command = commandFactory.produceDrinkOrderCommand(beverage, controller.getID(), drinkMaker.getID(), orderID);
 		
 		drinkMaker.getBehavior().sendOrder(command);
+	}
+	
+	public CommandFactory generateCommandFactoryType(DrinkMaker drinkMaker) {
+		switch(drinkMaker.getType()) {
+		case "Automated":
+			return new AdvancedCommandFactory();
+		case "Simple":
+			return new SimpleCommandFactory();
+		case "Programmable":
+			return new ProgrammableCommandFactory();
+			}
+		System.out.println("invalid command factory type");
+		return null;
 	}
 	
 

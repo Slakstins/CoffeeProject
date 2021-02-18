@@ -15,7 +15,7 @@ public class Main {
 		appCommunicator.setOrderObtainer(orderObtainer);
 		
 		System.out.println("Input the order filenumber to prepare.");
-		System.out.println("1 through 4 are valid orders. Input -1 to stop");
+		System.out.println("1 through 5 are valid orders. Input -1 to stop");
 		while (true) {
 			
 		Scanner sc = new Scanner(System.in);
@@ -28,7 +28,7 @@ public class Main {
 			
 		}
 
-		if (requestedVal >= 0 && requestedVal <= 4) {
+		if (requestedVal >= 0 && requestedVal <= 5) {
 			appCommunicator.sendOrderJson(requestedVal);
 		}
 		else if (requestedVal == -1) {

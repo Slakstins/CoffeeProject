@@ -1,0 +1,14 @@
+
+{
+  "order": { "orderID": 5,
+            "address": {
+                  "street": "870 Lincoln Ave",
+                  "ZIP": 47803
+            },
+            "drink": "Pumpkin Spice",
+            "condiments": [
+                {"name": "Salt", "qty": 1},
+                {"name": "Cream", "qty": 2}
+            ]
+            }
+}

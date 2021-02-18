@@ -1,11 +1,32 @@
 {"command": {
-  "Options": [{
-    "qty": 2,
-    "Name": "Hazelnut"
-  }],
-  "controller_id": 2,
-  "orderID": 4,
+  "Options": [
+    {
+      "qty": 2,
+      "Name": "Cream"
+    },
+    {
+      "qty": 1,
+      "Name": "Salt"
+    }
+  ],
+  "controller_id": 3,
+  "orderID": 5,
+  "Recipe": [
+    {
+      "commandStep": "add",
+      "object": "coffee"
+    },
+    {
+      "commandStep": "add",
+      "object": "pumpkin spice"
+    },
+    {"commandStep": "mix"},
+    {
+      "commandStep": "top",
+      "object": "nutmeg"
+    }
+  ],
   "coffee_machine_id": 0,
-  "Requesttype": "Simple",
-  "DrinkName": "Large Latte"
+  "Requesttype": "Automated",
+  "DrinkName": "Pumpkin Spice"
 }}

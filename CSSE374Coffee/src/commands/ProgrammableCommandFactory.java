@@ -3,19 +3,22 @@ package commands;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import beverageCreation.Beverage;
+import dataLayer.RecipeInitializer;
 
-public class AdvancedCommandFactroy extends CommandFactory {
+public class ProgrammableCommandFactory extends CommandFactory {
 
 	private String commandFilename = "Command.json";
-	
-		
-
+	private RecipeInitializer recipeInitializer;
+	public ProgrammableCommandFactory() {
+		this.recipeInitializer = new RecipeInitializer();
+	}
 
 	/**
 	 *might want to put this in the superclass so it's in both. How will this vary from simple to advanced
@@ -44,6 +47,9 @@ public class AdvancedCommandFactroy extends CommandFactory {
 
 			bPointer = bPointer.unwrapDrink();
 		}
+		// use the drinkname here to add programmable instructions
+		command = addProgrammableSteps(bPointer.getAsString(), command);
+		
 		command.put("DrinkName", bPointer.getAsString());
 		command.put("Options", condiments);
 
@@ -68,5 +74,31 @@ public class AdvancedCommandFactroy extends CommandFactory {
         DrinkOrderCommand machineCommand = new DrinkOrderCommand(command, commandFile);
         return machineCommand;
 	}
+	
+	private JSONObject addProgrammableSteps(String drinkName, JSONObject commandJSON) {
+		ArrayList<String[]> recipe = recipeInitializer.obtainRecipe(drinkName);
+		if (recipe == null) {
+			return commandJSON;
+		}
 
+		JSONArray recipeJSON = new JSONArray();
+		//iterate over the steps
+		for (int i = 0; i < recipe.size(); i++) {
+			JSONObject stepJSON = new JSONObject();
+			String[] step = recipe.get(i);
+			stepJSON.put("commandStep", step[0]);
+			if (step[1] != null) {
+				// in this case it has a condiment
+				stepJSON.put("object", step[1]);
+			}
+			recipeJSON.put(stepJSON);
+		}
+		
+		
+		commandJSON.put("Recipe", recipeJSON);
+		return commandJSON;
+		
+	}
+	
+	
 }

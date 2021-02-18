@@ -22,6 +22,12 @@ public class ShopInitializer {
 		addControllers(shop2, 1);
 		shops.add(shop2);
 		
+		Shop shop3 = new Shop("870 Lincoln Ave", 47803);
+		
+		addControllers(shop3, 1);
+		shops.add(shop3);
+		
+		
 	}
 	
 	public ArrayList<Controller> findControllers(String address, int zip) {
@@ -67,6 +73,8 @@ public class ShopInitializer {
 			controller.setDrinkMakers(drinkMakers);
 			break;
 		case 3:
+			drinkMakers.add(new DrinkMaker(machineId++, "Programmable"));
+			controller.setDrinkMakers(drinkMakers);
 			break;
 		case 4:
 			break;
